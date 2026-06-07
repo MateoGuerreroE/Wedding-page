@@ -1,7 +1,9 @@
+import Footer from "./footer";
 import Description from "./sections/Description";
 import Dressing from "./sections/Dressing";
 import Home from "./sections/Home";
 import Itinerary from "./sections/Itinerary";
+import Location from "./sections/Location";
 
 export default function Page() {
   return (
@@ -10,6 +12,8 @@ export default function Page() {
       <Description />
       <Itinerary />
       <Dressing />
+      <Location />
+      <Footer />
     </div>
   );
 }

@@ -19,11 +19,15 @@ export default function NavBar() {
         <a href="#itinerary" className="hover:cursor-pointer hover:font-bold">
           Itinerario
         </a>
-        <a className="hover:cursor-pointer hover:font-bold">
+        <a href="#dressing" className="hover:cursor-pointer hover:font-bold">
           Código de vestimenta
         </a>
-        <a className="hover:cursor-pointer hover:font-bold">Lluvia de cartas</a>
-        <a className="hover:cursor-pointer hover:font-bold">Cómo llegar</a>
+        <a href="#letter" className="hover:cursor-pointer hover:font-bold">
+          Lluvia de cartas
+        </a>
+        <a href="#location" className="hover:cursor-pointer hover:font-bold">
+          Cómo llegar
+        </a>
       </div>
     </nav>
   );
