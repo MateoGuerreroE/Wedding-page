@@ -11,6 +11,7 @@ export default function Itinerary() {
               alt="Itinerary"
               width={500}
               height={500}
+              className="z-20"
             />
             <Image
               src="/material/dots2.svg"
