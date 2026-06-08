@@ -6,7 +6,7 @@ export default function Dressing() {
       id="dressing"
       className="w-full bg-linear-to-b from-[#F9F9F9] to-[#FFE7F0] from-20% flex justify-center"
     >
-      <div className="max-w-350 p-6 md:p-10 md:py-26 py-20 relative text-black font-primary">
+      <div className="max-w-350 p-6 md:p-10 md:py-26 py-12 relative text-black font-primary">
         <div className="flex flex-col items-center w-full">
           <Image
             src="/titles/dress_code_title.svg"
@@ -16,7 +16,7 @@ export default function Dressing() {
           />
           <p className="text-lg">(Formal creativo)</p>
         </div>
-        <div className="flex flex-col w-full items-center text-center mt-10 md:text-lg md:px-10 p-4 relative">
+        <div className="flex flex-col w-full items-center text-center mt-6 md:text-lg md:px-10 p-4 relative">
           <Image
             src="/material/orange_star.svg"
             alt="Orange Star"

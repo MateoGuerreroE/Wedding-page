@@ -62,8 +62,8 @@ export default function Location() {
                   className="md:size-auto size-18 h-24"
                 />
                 <p>
-                  La dirección aparecerá con el nombre del lugar: restaurante
-                  graná Cra. 6 #3 - 33
+                  Recomendamos salir con tiempo, especialmente si vienes desde
+                  Bogotá
                 </p>
               </div>
             </div>
