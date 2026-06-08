@@ -11,7 +11,7 @@ export default function Location() {
           height={50}
         />
         <div className="flex md:flex-row flex-col mt-10 gap-18 md:gap-0 text-black">
-          <div className="flex flex-col md:w-1/2 font-primary text-lg gap-12">
+          <div className="flex flex-col md:w-1/2 font-primary md:text-lg gap-12">
             <p>
               Queremos que llegues tranquila/o y disfrutes el recorrido.
               Recomendamos usar Waze, aunque también podrás usar Google Maps

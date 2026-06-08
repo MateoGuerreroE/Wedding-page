@@ -35,7 +35,7 @@ export default function Home() {
               <div className="flex text-lg pt-5">
                 <div className="flex flex-col w-1/2 items-start">
                   <p>SÁBADO 4 DE JULIO</p>
-                  <p>12:45 P.M.</p>
+                  <p>12:30 P.M.</p>
                 </div>
                 <div className="flex flex-col w-1/2 items-end">
                   <p>ZIPAQUIRÁ</p>
@@ -89,7 +89,7 @@ export default function Home() {
             <div className="flex text-base pt-4">
               <div className="flex flex-col w-1/2 items-start">
                 <p>SÁBADO 4 DE JULIO</p>
-                <p>12:45 P.M.</p>
+                <p>12:30 P.M.</p>
               </div>
               <div className="flex flex-col w-1/2 items-end">
                 <p>ZIPAQUIRÁ</p>

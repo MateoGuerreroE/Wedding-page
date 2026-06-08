@@ -25,7 +25,7 @@ export default function Description() {
             width={520}
             height={100}
           />
-          <div className="flex flex-col text-center font-primary text-black max-w-150 text-lg md:text-xl gap-6">
+          <div className="flex flex-col text-center font-primary text-black max-w-150 xs:text-lg md:text-xl gap-6">
             <p>
               Acompáñanos a celebrar nuestro matrimonio en la hermosa Zipaquirá.
               La ceremonia espiritual se llevará a cabo en la{" "}
