@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "./navbar";
+import { cn } from "@/lib/utils";
 
 const centuryGothic = localFont({
   src: [
@@ -32,7 +33,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${centuryGothic.variable} h-full scroll-smooth antialiased`}
+      className={cn(
+        "h-full",
+        "scroll-smooth",
+        "antialiased",
+        centuryGothic.variable,
+        "font-sans",
+      )}
     >
       <body className="min-h-full flex flex-col overflow-x-hidden scroll-smooth">
         <NavBar />
