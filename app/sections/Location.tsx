@@ -38,7 +38,9 @@ export default function Location() {
                   height={83}
                   className="md:size-auto size-18"
                 />
-                <p>El restaurante cuenta con parqueadero</p>
+                <p>
+                  Puedes dar click en el mapa para ver más detalles y la ruta
+                </p>
               </div>
               <div className="grid grid-cols-[5rem_1fr] gap-6 items-center">
                 <Image
@@ -48,10 +50,7 @@ export default function Location() {
                   height={83}
                   className="md:size-auto size-18"
                 />
-                <p>
-                  Recomendamos salir con tiempo, especialmente si vienes desde
-                  Bogotá
-                </p>
+                <p>El restaurante cuenta con parqueadero</p>
               </div>
               <div className="grid grid-cols-[5rem_1fr] gap-6 items-center">
                 <Image
