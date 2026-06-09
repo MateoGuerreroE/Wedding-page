@@ -36,7 +36,7 @@ export default function Dressing() {
             <p>
               Puedes jugar con colores vibrantes, cálidos o neutros que conecten
               con la energía de la celebración. Si quieres estar más cómodo/a,
-              puedes usar tennis blancos o beige sin problema
+              puedes usar tenis blancos o beige sin problema
             </p>
           </div>
           <Image
@@ -58,7 +58,7 @@ export default function Dressing() {
             <p>
               No uses prendas en color blanco, beige, negro y rosa en cualquiera
               de sus tonalidades. No uses jean. El blanco y beige podrán usarse
-              únicamente en zapatos, tennis o camisas para hombres
+              únicamente en zapatos, tenis o camisas para hombres
             </p>
           </div>
           <Image
