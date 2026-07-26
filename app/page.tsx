@@ -1,19 +1,19 @@
+import Main from "@/app/sections/Main";
 import Footer from "./footer";
-import Description from "./sections/Description";
-import Dressing from "./sections/Dressing";
-import Home from "./sections/Home";
-import Itinerary from "./sections/Itinerary";
-import Location from "./sections/Location";
+import Welcome from "./sections/Welcome";
+import Highlights from "./sections/Highlights";
+import Gallery from "./sections/Gallery";
+import Quote from "./sections/Quote";
 
 export default function Page() {
-  return (
-    <div className="flex flex-col flex-1 overflow-x-hidden bg-background pt-24 md:pt-32 items-center">
-      <Home />
-      <Description />
-      <Itinerary />
-      <Dressing />
-      <Location />
-      <Footer />
-    </div>
-  );
+	return (
+		<div className="flex flex-col flex-1 overflow-x-hidden bg-background pt-24 md:pt-32 items-center">
+			<Main />
+			<Welcome />
+			<Highlights />
+			<Gallery />
+			<Quote />
+			<Footer />
+		</div>
+	);
 }

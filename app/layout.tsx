@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Dancing_Script } from "next/font/google";
 import "./globals.css";
 import NavBar from "./navbar";
 import { cn } from "@/lib/utils";
@@ -20,6 +21,11 @@ const centuryGothic = localFont({
   variable: "--font-century-gothic",
 });
 
+const dancingScript = Dancing_Script({
+  subsets: ["latin"],
+  variable: "--font-script",
+});
+
 export const metadata: Metadata = {
   title: "Teo & Pau",
   description: "Wedding page for Teo & Pau",
@@ -38,6 +44,7 @@ export default function RootLayout({
         "scroll-smooth",
         "antialiased",
         centuryGothic.variable,
+        dancingScript.variable,
         "font-sans",
       )}
     >
