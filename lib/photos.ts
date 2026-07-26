@@ -1,25 +1,7 @@
-import fs from "fs";
-import path from "path";
-
-const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
-
-function listImages(dir: string) {
-  return fs
-    .readdirSync(dir, { withFileTypes: true })
-    .filter(
-      (entry) =>
-        entry.isFile() && IMAGE_EXTENSIONS.has(path.extname(entry.name).toLowerCase()),
-    )
-    .map((entry) => entry.name)
-    .sort();
-}
+import manifest from "./photos-manifest.json";
 
 export function getPhotos() {
-  const photosDir = path.join(process.cwd(), "public", "photos");
-  return {
-    couple: listImages(photosDir),
-    general: listImages(path.join(photosDir, "protocol")),
-  };
+  return manifest;
 }
 
 export function sampleEven<T>(items: T[], count: number): T[] {

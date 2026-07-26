@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "predev": "node scripts/generate-photo-manifest.mjs",
+    "prebuild": "node scripts/generate-photo-manifest.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "photos:manifest": "node scripts/generate-photo-manifest.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
