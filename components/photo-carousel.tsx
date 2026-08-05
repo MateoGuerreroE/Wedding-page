@@ -15,7 +15,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const GROUP_SIZE = 4;
+const GROUP_SIZE = 2;
 
 function chunk<T>(items: T[], size: number): T[][] {
   return Array.from({ length: Math.ceil(items.length / size) }, (_, i) =>
@@ -61,7 +61,7 @@ export default function PhotoCarousel({
   return (
     <div
       id={id}
-      className="flex w-full flex-col items-center gap-5 px-4 md:px-8 py-4 scroll-mt-24 md:w-1/2 md:scroll-mt-32"
+      className="flex w-full flex-col items-center gap-5 px-4 md:px-8 py-4 scroll-mt-24 md:scroll-mt-32"
     >
       <div className="flex flex-col items-center gap-1 font-primary text-black">
         <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ export default function PhotoCarousel({
         <CarouselContent>
           {groups.map((group, groupIndex) => (
             <CarouselItem key={group[0]} className="basis-full">
-              <div className="grid grid-cols-2 grid-rows-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {group.map((file, cellIndex) => (
                   <button
                     key={file}
@@ -91,7 +91,7 @@ export default function PhotoCarousel({
                       src={`${basePath}/${file}`}
                       alt={title}
                       fill
-                      sizes="(min-width: 768px) 23vw, 45vw"
+                      sizes="(min-width: 640px) 40vw, 92vw"
                       quality={90}
                       className="object-cover"
                     />
