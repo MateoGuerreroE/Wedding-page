@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const GROUP_SIZE = 2;
@@ -22,6 +22,11 @@ function chunk<T>(items: T[], size: number): T[][] {
     items.slice(i * size, i * size + size),
   );
 }
+
+type Lightbox = {
+  photos: string[];
+  index: number;
+};
 
 type PhotoCarouselProps = {
   id: string;
@@ -40,23 +45,21 @@ export default function PhotoCarousel({
   previewPhotos,
   allPhotos,
 }: PhotoCarouselProps) {
-  const [expanded, setExpanded] = useState(false);
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [fullGalleryOpen, setFullGalleryOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<Lightbox | null>(null);
 
-  const photos = expanded ? allPhotos : previewPhotos;
-  const groups = chunk(photos, GROUP_SIZE);
+  const groups = chunk(previewPhotos, GROUP_SIZE);
 
   useEffect(() => {
     if (!api) return;
-    setSelected(api.selectedScrollSnap());
-    api.on("select", () => setSelected(api.selectedScrollSnap()));
+    const onSelect = () => setSelected(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
   }, [api]);
-
-  useEffect(() => {
-    api?.scrollTo(0);
-  }, [expanded, api]);
 
   return (
     <div
@@ -68,9 +71,7 @@ export default function PhotoCarousel({
           {icon}
           <span className="text-lg">{title}</span>
         </div>
-        <span className="text-sm text-[#CF2224]">
-          {allPhotos.length} fotos
-        </span>
+        <span className="text-sm text-[#CF2224]">{allPhotos.length} fotos</span>
       </div>
 
       <Carousel setApi={setApi} opts={{ align: "start" }} className="w-full">
@@ -83,9 +84,12 @@ export default function PhotoCarousel({
                     key={file}
                     type="button"
                     onClick={() =>
-                      setLightboxIndex(groupIndex * GROUP_SIZE + cellIndex)
+                      setLightbox({
+                        photos: previewPhotos,
+                        index: groupIndex * GROUP_SIZE + cellIndex,
+                      })
                     }
-                    className="relative block aspect-[3/2] w-full cursor-zoom-in overflow-hidden rounded-lg"
+                    className="relative block aspect-3/2 w-full cursor-zoom-in overflow-hidden rounded-lg"
                   >
                     <Image
                       src={`${basePath}/${file}`}
@@ -125,39 +129,82 @@ export default function PhotoCarousel({
 
       <Button
         variant="outline"
-        onClick={() => setExpanded((value) => !value)}
+        onClick={() => setFullGalleryOpen(true)}
         className="font-primary border-[#CF2224]/40 text-black hover:bg-[#FFE2CE]"
       >
-        {expanded ? "Ver menos" : "Ver galería completa"}
+        Ver galería completa
       </Button>
 
-      <Dialog
-        open={lightboxIndex !== null}
-        onOpenChange={(open) => !open && setLightboxIndex(null)}
-      >
+      <Dialog open={fullGalleryOpen} onOpenChange={setFullGalleryOpen}>
         <DialogContent
           showCloseButton
-          className="w-[92vw] max-w-4xl bg-black/95 p-2 ring-0 sm:max-w-4xl"
+          className="max-h-[90vh] w-[95vw] max-w-350 overflow-y-auto sm:max-w-350"
+        >
+          <DialogTitle className="sticky -top-4 -mx-4 -mt-4 bg-popover px-4 pt-4 pb-3 font-primary text-black">
+            {title} <span className="text-[#CF2224]">({allPhotos.length})</span>
+          </DialogTitle>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+            {allPhotos.map((file, index) => (
+              <button
+                key={file}
+                type="button"
+                onClick={() => setLightbox({ photos: allPhotos, index })}
+                className="relative block aspect-3/2 w-full cursor-zoom-in overflow-hidden rounded-lg bg-black/5"
+              >
+                <Image
+                  src={`${basePath}/${file}`}
+                  alt={`${title} ${index + 1}`}
+                  fill
+                  sizes="(min-width: 768px) 23vw, 45vw"
+                  quality={80}
+                  className="object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={lightbox !== null}
+        onOpenChange={(open) => !open && setLightbox(null)}
+      >
+        <DialogContent
+          showCloseButton={false}
+          className="h-[95vh] w-[95vw] max-w-none bg-black/95 p-2 ring-0 sm:max-w-none"
         >
           <DialogTitle className="sr-only">{title}</DialogTitle>
-          {lightboxIndex !== null && (
-            <div className="relative">
-              <div className="relative aspect-[3/2] w-full">
-                <Image
-                  src={`${basePath}/${photos[lightboxIndex]}`}
-                  alt={title}
-                  fill
-                  sizes="(min-width: 768px) 56rem, 92vw"
-                  quality={95}
-                  className="object-contain"
-                />
-              </div>
+          {lightbox && (
+            <div className="relative h-full w-full">
+              <Image
+                src={`${basePath}/${lightbox.photos[lightbox.index]}`}
+                alt={title}
+                fill
+                sizes="95vw"
+                quality={95}
+                className="object-contain"
+              />
+              <button
+                type="button"
+                aria-label="Cerrar"
+                onClick={() => setLightbox(null)}
+                className="absolute right-2 top-2 rounded-full bg-white/85 p-2 hover:bg-white"
+              >
+                <X />
+              </button>
               <button
                 type="button"
                 aria-label="Foto anterior"
                 onClick={() =>
-                  setLightboxIndex(
-                    (idx) => ((idx ?? 0) - 1 + photos.length) % photos.length,
+                  setLightbox((current) =>
+                    current
+                      ? {
+                          ...current,
+                          index:
+                            (current.index - 1 + current.photos.length) %
+                            current.photos.length,
+                        }
+                      : current,
                   )
                 }
                 className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/85 p-2 hover:bg-white"
@@ -168,7 +215,14 @@ export default function PhotoCarousel({
                 type="button"
                 aria-label="Foto siguiente"
                 onClick={() =>
-                  setLightboxIndex((idx) => ((idx ?? 0) + 1) % photos.length)
+                  setLightbox((current) =>
+                    current
+                      ? {
+                          ...current,
+                          index: (current.index + 1) % current.photos.length,
+                        }
+                      : current,
+                  )
                 }
                 className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/85 p-2 hover:bg-white"
               >
